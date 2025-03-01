@@ -17,6 +17,20 @@ public class Main {
         return matrix;
     }
 
+    public static int[][] complementGraph(int[][] matrix) {
+        int n = matrix.length;
+        int[][] complement = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i != j) {
+                    complement[i][j] = 1 - matrix[i][j]; // Inversăm muchiile (0 → 1, 1 → 0)
+                }
+            }
+        }
+        return complement;
+    }
+
     public static boolean isClique(List<Integer> subset, int[][] matrix) {
         for (int i = 0; i < subset.size(); i++) {
             for (int j = i + 1; j < subset.size(); j++) {
@@ -28,18 +42,6 @@ public class Main {
         return true;
     }
 
-    public static boolean isStable(List<Integer> subset, int[][] matrix) {
-        for (int i = 0; i < subset.size(); i++) {
-            for (int j = i + 1; j < subset.size(); j++) {
-                if (matrix[subset.get(i)][subset.get(j)] == 1) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-
     public static boolean findClique(int[][] matrix, List<Integer> current, int start, int k) {
         if (current.size() >= k && isClique(current, matrix)) {
             return true;
@@ -50,23 +52,9 @@ public class Main {
             if (findClique(matrix, current, i + 1, k)) {
                 return true;
             }
-            current.remove(current.size() - 1); //elim ultimul nod pt ca sa fac alte combinatii
-        }
-        return false;
-    }
-
-    public static boolean findStable(int[][] matrix, List<Integer>current, int start, int k){
-        if(current.size() >=k && isStable(current,matrix)){
-            return true;
-        }
-        for(int i = start; i<matrix.length; i++){
-            current.add(i);
-            if(findStable(matrix, current, i+1, k)) {
-                return true;
-            }
             current.remove(current.size() - 1);
         }
-        return  false;
+        return false;
     }
 
     public static void printMatrix(int[][] matrix) {
@@ -88,28 +76,28 @@ public class Main {
         int k = Integer.parseInt(args[1]);
 
         if (n < k || k < 2) {
-            System.out.println("Avem grija ca n >= k >= 2.");
+            System.out.println("Avem grijă ca n >= k >= 2.");
             return;
         }
 
         int[][] matrix = generateRandomGraph(n);
-        System.out.println("Matricea de adiacență:");
+        System.out.println("Matricea de adiacenta:");
         printMatrix(matrix);
 
         boolean hasClique = findClique(matrix, new ArrayList<>(), 0, k);
-        boolean hasStable = findStable(matrix, new ArrayList<>(), 0, k);
+        System.out.println(hasClique
+                ? "Graful conține o clica de cel puțin " + k + " noduri."
+                : "Graful nu contine o clica de cel puțin " + k + " noduri.");
 
-        if (hasClique) {
-            System.out.println("Are o clica de cel putin " + k + " noduri.");
-        } else {
-            System.out.println("Nu are o clică de cel puțin " + k + " noduri.");
-        }
+        int[][] complement = complementGraph(matrix);
+        System.out.println("Complementul grafului:");
+        printMatrix(complement);
 
-        if(hasStable){
-            System.out.println("Are o mult stabila de cel putin " + k + " noduri.");
+        boolean hasStableSet = findClique(complement, new ArrayList<>(), 0, k);
+        if(hasStableSet){
+            System.out.println("Graful contine un set stabil de cel putin " + k + " noduri.");
         }
-        else{
-            System.out.println("Nu are o mult stabila de cel putin " + k + " noduri.");
-        }
+        else
+            System.out.println("Graful nu contine un set stabil de cel putin " + k + " noduri.");
     }
 }
