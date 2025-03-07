@@ -1,33 +1,31 @@
+import jdk.jfr.Frequency;
+
+import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
 
-public class Student extends Person{
-    private Integer regNumber;
-    private Project[] okProjects;
+public class Student extends Person{ /** Leonte Calin **/
+Project[] availableProjects;
+    private int regNumber;
 
-    public Student(String name, Integer regNumber, String dateOfBirth, Project[] okProjects){
-        super(name, dateOfBirth);
+    public Student (String name, String birthDate, Project[] projects, int regNumber)
+    {
+        super(name, birthDate);
+        availableProjects = projects;
         this.regNumber = regNumber;
-        this.okProjects = okProjects;
-    }
-
-    public Integer getRegNumber() {
-        return regNumber;
-    }
-
-    public void setRegNumber(Integer regNumber) {
-        this.regNumber = regNumber;
-    }
-
-    public Project[] getOkProject() {
-        return okProjects;
     }
 
     @Override
-    public String toString() {
-        return "Student{" +
-                "regNumber=" + regNumber +
-                "project=" + okProjects +
-                '}';
+    public boolean equals(Object obj) {
+        Student student = (Student) obj;
+        return regNumber == student.regNumber;
+    }
+
+    public int getRegNumber() {
+        return regNumber;
+    }
+
+    public void setRegNumber(int regNumber) {
+        this.regNumber = regNumber;
     }
 }
