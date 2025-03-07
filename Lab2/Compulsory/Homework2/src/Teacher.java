@@ -1,26 +1,18 @@
 import java.util.Arrays;
+import java.util.Date;
 
-public class Teacher extends Person{
-    private Project[] proposedProjects;
+public class Teacher extends Person { /** Leonte Calin **/
+private Project[] proposedProjects;
 
-    public Teacher(String name, String dateOfBirth, Project[] proposedProjects){
-        super(name,dateOfBirth);
-        this.proposedProjects = proposedProjects;
+    public Teacher(String name, String birthDate, Project[] projects) {
+        super(name, birthDate);
+        proposedProjects = projects;
     }
 
-    public Project[] getProposedProjects() {
-        return proposedProjects;
+    public boolean equals(Object obj) {
+        if (!super.equals(obj))
+            return false;
+        Teacher teacher = (Teacher) obj;
+        return Arrays.equals(((Teacher) obj).proposedProjects, proposedProjects);
     }
-
-    public void setProposedProjects(Project[] proposedProjects) {
-        this.proposedProjects = proposedProjects;
-    }
-
-    @Override
-    public String toString() {
-        return "Teacher{" +
-                "proposedProjects=" + Arrays.toString(proposedProjects) +
-                '}';
-    }
-
 }
