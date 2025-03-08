@@ -3,7 +3,7 @@ enum Type{
     theoretical, practical
 }
 
-public class Main { /** Leonte Calin **/
+public class Main {
 public static void main(String[] args) {
 
     Project p1 = new Project("QuizzGame", Type.theoretical);
