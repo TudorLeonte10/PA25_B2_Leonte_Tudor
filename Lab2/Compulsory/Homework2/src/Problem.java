@@ -1,4 +1,4 @@
-public class Problem {/** Leonte Calin **/
+public class Problem {
 Student[] students;
     Teacher[] teachers;
     Project[] projects;
