@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
-public class Student extends Person{ /** Leonte Calin **/
+public class Student extends Person{ 
 Project[] availableProjects;
     private int regNumber;
 
