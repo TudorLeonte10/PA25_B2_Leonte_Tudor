@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Date;
 
-public class Teacher extends Person { /** Leonte Calin **/
+public class Teacher extends Person { 
 private Project[] proposedProjects;
 
     public Teacher(String name, String birthDate, Project[] projects) {
